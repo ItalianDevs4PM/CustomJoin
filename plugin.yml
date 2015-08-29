@@ -1,0 +1,16 @@
+
+# CustomJoin by @ItalianDevs4PM (idea by @AryToNeX)
+
+name: CustomJoin
+version: "1.0.0"
+author: ItalianDevs4PM, AryToNeX, fycarman, Flavius12, XEmAX32, xionbig, luca28pet
+website: http://github.com/ItalianDevs4PM
+api: [1.12.0]
+main: CustomJoin\Main
+load: STARTUP
+permissions:
+  customjoin:
+    description: "Main permission"
+    default: false
+    children:
+      # continuate voi ;D
