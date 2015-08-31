@@ -30,16 +30,27 @@ class Main extends PluginBase implements Listener{
   }
   
   public function onPlayerJoin(PlayerJoinEvent $event){
+    $name = $e->getPlayer->getName;
+    $rank1 = $this->getConfig()->get("Rank1");
     $player = $event->getPlayer();
-		  if($player->hasPermission("/* non so che mettere */"){
-			  # neanche qui
+    $perm1 = $this->getConfig()->get("Perm1");
+		  if($player->hasPermission("$perm1"){
+			  foreach($this->getServer()->getPlayers() as $ps){
+                          $ps->sendMessage(TextFormat::GREEN . " ".$rank $name." É entrato in partita");
+/*Magari si può cambiare con setJoinMessage pero per ora mi sembra vada bene così poi dite voi :D */
 		  }
+           }
   }
 
   public function onPlayerQuit(PlayerQuitEvent $event){
     $player = $event->getPlayer();
-      if($player->hasPermission("/* non so che mettere */"){
-        # neanche qui (x2) lol
+    $name = $e->getPlayer->getName();
+    $rank1 = $this->getConfig()->get("Rank1");
+    $perm1 = $this->getConfig()->get("Perm1");
+      if($player->hasPermission("$perm1"){
+      foreach($this->getServer()->getOnlinePlayers as $ps){
+      $ps->sendMessage(TextFormat::RED . " ".$rank $name." È entrato in partita");
+       /*qui invece si può mettere setLeaveMessage anche se non ricordo se si chiamava così xD*/
       }
   }
 
