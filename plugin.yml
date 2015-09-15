@@ -1,6 +1,4 @@
-
 # CustomJoin by @ItalianDevs4PM (idea by @AryToNeX)
-
 name: CustomJoin
 version: "1.0.0"
 author: ItalianDevs4PM, AryToNeX, fycarman, Flavius12, XEmAX32, xionbig, luca28pet
@@ -8,9 +6,26 @@ website: http://github.com/ItalianDevs4PM
 api: [1.12.0]
 main: CustomJoin\Main
 load: STARTUP
-permissions:
+
+commands:
   customjoin:
+    description: "Show you all the plugin's command"
+    usage: "/cj "
+    permission: customjoin.command
+    aliases: [cj, customj, cjoin]
+
+permissions:
+  customjoin.command:
     description: "Main permission"
     default: false
     children:
+          customjoin.command.help:
+            description: Show plugin's help.
+            default: op
+          customjoin.command.set:
+            description: Set customized join message for player.
+            default: op
+          customjoin.command.info:
+            description: Show plugin's info.
+            default: op
       # continuate voi ;D
