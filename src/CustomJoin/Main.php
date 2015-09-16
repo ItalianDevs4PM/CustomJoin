@@ -42,15 +42,12 @@ class Main extends PluginBase{
 	$message = str_replace($symbol."r", TextFormat::RESET, $message);
 
 	return $message;
-
   }
 
   public function onEnable(){
-    @mkdir($this->getDataFolder());
-    $this->getServer()->getPluginManager()->registerEvents(new CustomJoinListener($this), $this);
-    $this->getLogger()->info(TextFormat::GREEN . "CustomJoin enabled!");
-    $this->saveDefaultConfig(); //TODO: Da creare
-    //TODO: creare una cartella players, nella quale creare un file "nomegiocatore.yml" con il proprio messaggio personalizzato
+	  $this->getServer()->getPluginManager()->registerEvents(new CustomJoinListener($this), $this);
+	  $this->getLogger()->info(TextFormat::GREEN . "CustomJoin enabled!");
+      //$this->saveDefaultConfig(); //TODO: Da creare
 
   }
   

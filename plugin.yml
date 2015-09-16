@@ -10,7 +10,7 @@ load: STARTUP
 commands:
   customjoin:
     description: "Show you all the plugin's command"
-    usage: "/cj "
+    usage: "/cj"
     permission: customjoin.command
     aliases: [cj, customj, cjoin]
 

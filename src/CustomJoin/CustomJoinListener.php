@@ -4,9 +4,9 @@ namespace CustomJoin;
 
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
-use pocketmine\Player;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\utils\Config;
 
 class CustomJoinListener extends PluginBase implements Listener{
     private $plugin;
@@ -16,21 +16,25 @@ class CustomJoinListener extends PluginBase implements Listener{
     }
 
     public function onPlayerJoin(PlayerJoinEvent $event){
-        $rank1 = $this->getConfig()->get("Rank1");
+        $rank1 = "[Regular]";
         $player = $event->getPlayer();
         $name = $player->getName();
-        if($player->hasPermission("customjoin.command")){
-            $this->getServer()->broadcastMessage("&2" . $rank1 . $name . " è entrato in partita"); //TODO: Da cambiare
+        if (!file_exists($this->getDataFolder() . "/players" . strtolower($name) . ".yml")){
+            @mkdir($this->getDataFolder() . "/players");
+
+            $playerconfig = new Config($this->getDataFolder() . "/players" . strtolower($name) . ".yml", Config::YAML,
+                [
+                  "JoinMessage" => $rank1 . $name . " joined the game.",
+                    "LeaveMessage" => $rank1 . $name . " left the game."
+                ]);
         }
+        $event->setJoinMessage($playerconfig->get("JoinMessage")); //TODO: Da sistemare configurazione dei rank
     }
 
     public function onPlayerQuit(PlayerQuitEvent $event){
         $player = $event->getPlayer();
         $name = $player->getName();
-        $rank1 = $this->getConfig()->get("Rank1");
-
-        if($player->hasPermission("customjoin.command")){}
-            $this->getServer()->broadcastMessage("&e" . $rank1 . $name . " è uscito dalla partita"); //TODO: Da cambiare
-            return true;
-        }
+        $playerconfig = $this->getDataFolder() . "/players" . strtolower($name) . ".yml";
+        $event->setQuitMessage($playerconfig->get("LeaveMessage"));
     }
+}
