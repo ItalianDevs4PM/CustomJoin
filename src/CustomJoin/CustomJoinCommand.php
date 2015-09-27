@@ -9,9 +9,11 @@ use pocketmine\plugin\PluginBase;
 
 class CustomJoinCommand extends PluginBase implements CommandExecutor{
     private $plugin;
+    private $playerconfig;
 
-    public function __construct(Main $plugin){
-       $this->plugin = $plugin;
+    public function __construct(Main $plugin, CustomJoinListener $playerconfig){
+        $this->plugin = $plugin;
+        $this->playerconfig = $playerconfig;
     }
 
     public function onPlayerCommand(CommandSender $sender, Command $cmd, $label, array $args){
@@ -37,16 +39,16 @@ class CustomJoinCommand extends PluginBase implements CommandExecutor{
                 }
                 return true;
             }
-            if($args[0] == "set"){
+                        if($args[0] == "set"){
                 if($sender->hasPermission("customjoin.command.set")){
                     if($args[1] == "join"){
-                        $args[2] = $playerconfig->set("JoinMessage");
-                        $playerconfig->save(true);
-                        $playerconfig->reload();
+                        $args[2] = $this->playerconfig->getConfig()->set("JoinMessage");
+                        $this->$playerconfig->saveConfig();
+                        $this->playerconfig->reloadConfig();
                    }elseif($args[1] == "leave"){
-                        $args[2] = $playerconfig->set("LeaveMessage");
-                        $playerconfig->save(true);
-                        $playerconfig->reload();
+                        $args[2] = $this->playerconfig->getConfig()->set("LeaveMessage");
+                        $this->playerconfig->saveConfig();
+                        $this->playerconfig->reloadConfig();
                    }
                 }else{
                     $sender->sendMessage("&4You don't have permission to use this command.");

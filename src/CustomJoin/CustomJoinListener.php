@@ -10,9 +10,11 @@ use pocketmine\utils\Config;
 
 class CustomJoinListener extends PluginBase implements Listener{
     private $plugin;
+    private $playerconfig;
 
-    public function __construct(Main $plugin){
+    public function __construct(Main $plugin, CustomJoinListener $playerconfig){
         $this->plugin = $plugin;
+        $this->playerconfig = $playerconfig;
     }
 
     public function onPlayerJoin(PlayerJoinEvent $event){
@@ -28,13 +30,13 @@ class CustomJoinListener extends PluginBase implements Listener{
                     "LeaveMessage" => $rank1 . $name . " left the game."
                 ]);
         }
-        $event->setJoinMessage($playerconfig->get("JoinMessage")); //TODO: Da sistemare configurazione dei rank
+        $event->setJoinMessage($this->playerconfig->getConfig()->get("JoinMessage")); //TODO: Da sistemare configurazione dei rank
     }
 
     public function onPlayerQuit(PlayerQuitEvent $event){
         $player = $event->getPlayer();
         $name = $player->getName();
         $playerconfig = $this->getDataFolder() . "/players" . strtolower($name) . ".yml";
-        $event->setQuitMessage($playerconfig->get("LeaveMessage"));
+        $event->setQuitMessage($this->playerconfig->getConfig()->get("LeaveMessage"));
     }
 }

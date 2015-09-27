@@ -16,7 +16,6 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
 class Main extends PluginBase{
-
   public function translateColors($symbol, $message){
     $message = str_replace($symbol."0", TextFormat::BLACK, $message);
 	$message = str_replace($symbol."1", TextFormat::DARK_BLUE, $message);
