@@ -4,7 +4,7 @@
 
                     -== CustomJoin ==-
                 -== by @ItalianDevs4PM ==-
-(AryToNeX, xionbig, fycarman, Flavius12, luca28pet, XEmAX32)
+(AryToNeX, NikoZazza, fycarman, Flavius12, luca28pet, XEmAX32)
 
 */
 
